@@ -1,0 +1,19 @@
+{
+  "name": "ravenbot",
+  "version": "1.0.0",
+  "description": "Avian discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZachSchaffer/RavenBot.git"
+  },
+  "author": "ZachSchaffer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZachSchaffer/RavenBot/issues"
+  },
+  "homepage": "https://github.com/ZachSchaffer/RavenBot#readme"
+}
