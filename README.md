@@ -1,2 +1,2 @@
 # RavenBot
-wonderfully avian discord bot
+Prefix: caw
