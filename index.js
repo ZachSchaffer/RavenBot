@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 const fs = require('fs')
 const path = './botconfig.json'
 
-const config;
+let config;
 const prefix = "!"
 try {
   if (fs.existsSync(path)) {
