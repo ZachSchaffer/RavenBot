@@ -46,7 +46,7 @@ bot.on("message", async message => {
   }
 });
 
-function ban(args, message) {
+async function ban(args, message) {
   console.log(message.author + " tried to ban " + message.mentions.members.first().user.tag);
   if (!message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))) {
     return message.reply(
@@ -77,7 +77,7 @@ function ban(args, message) {
   );
 }
 
-function purge(args, message) {
+async function purge(args, message) {
   const deleteCount = parseInt(args[0], 10);
 
   if (!deleteCount || deleteCount < 2 || deleteCount > 100)
