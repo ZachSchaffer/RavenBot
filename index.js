@@ -38,8 +38,8 @@ bot.on("message", async message => {
   const command = args.shift().toLowerCase();
 
   if (command === "ban") {
+    console.log(message.author + " tried to ban " + message.mentions.members.first().user.tag);
     if (!message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))) {
-      console.log(message.author + " tried to ban " + message.mentions.members.first());
       return message.reply(
         "You do not have permission to ban. This incident will be recorded."
       );
@@ -55,27 +55,24 @@ bot.on("message", async message => {
       );
 
     let reason = args.slice(1).join(" ");
-    if (!reason) reason = "No reason provided";
+    if (!reason) reason = "No reason provided.";
 
     await member
       .ban(reason)
       .catch(error =>
         message.reply(
-          `Sorry ${message.author} I couldn't ban because of : ${error}`
+          `${message.author} I couldn't ban because: ${error}`
         )
       );
     message.reply(
-      `${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`
+      `${member.user.tag} has been banned by ${message.author.tag} because ${reason}`
     );
   }
 
   if (command === "purge") {
-    // This command removes all messages from all users in the channel, up to 100.
 
-    // get the delete count, as an actual number.
     const deleteCount = parseInt(args[0], 10);
 
-    // Ooooh nice, combined conditions. <3
     if (!deleteCount || deleteCount < 2 || deleteCount > 100)
       return message.reply(
         "Please provide a number between 2 and 100 for the number of messages to delete"
