@@ -1,7 +1,18 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client();
+const fs = require('fs')
+const path = './botconfig.json'
 
-const config = require("./botconfig.json");
+const config;
+const prefix = "!"
+try {
+  if (fs.existsSync(path)) {
+    config = require("./botconfig.json");
+  } else {
+    config = process.env.TOKEN;
+  }
+} catch (err) {}
+
 
 bot.on("ready", () => {
   console.log(
@@ -28,11 +39,11 @@ bot.on("message", async message => {
 
   // Also good practice to ignore any message that does not start with our prefix,
   // which is set in the configuration file.
-  if (message.content.indexOf(config.prefix) !== 0) return;
+  if (message.content.indexOf(prefix) !== 0) return;
 
   // split command e.g. args = ["Is", "this", "the", "real", "life"]
   const args = message.content
-    .slice(config.prefix.length)
+    .slice(prefix.length)
     .trim()
     .split(/ +/g);
   const command = args.shift().toLowerCase();
