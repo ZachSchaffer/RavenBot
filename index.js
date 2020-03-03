@@ -9,6 +9,7 @@ try {
   if (fs.existsSync(path)) {
     config = require("./botconfig.json");
   } else {
+    console.log(process.env.TOKEN);
     config = process.env.TOKEN;
   }
 } catch (err) {}
