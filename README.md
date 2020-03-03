@@ -1,2 +1,1 @@
 # RavenBot
-Prefix: caw
