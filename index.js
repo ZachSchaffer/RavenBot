@@ -10,7 +10,8 @@ try {
     config = require("./botconfig.json");
   } else {
     console.log(process.env.TOKEN);
-    config = process.env.TOKEN;
+    // config = process.env.TOKEN;
+    return;
   }
 } catch (err) {}
 
