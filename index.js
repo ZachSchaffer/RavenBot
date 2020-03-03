@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = './botconfig.json'
 
 let token;
-const prefix = "!"
+const prefix = "raven ";
 try {
   if (fs.existsSync(path)) {
     const config = require("./botconfig.json");
@@ -56,10 +56,14 @@ bot.on("message", async message => {
   if (command === "purge") {
     return purge(args, message);
   }
+
+  if (command === "say") {
+    say(args, message);
+  }
 });
 
 async function ban(args, message) {
-  console.log(message.author + " tried to ban " + message.mentions.members.first().user.tag);
+  console.log(message.author.tag + " tried to ban " + message.mentions.members.first().tag);
   if (!message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))) {
     return message.reply(
       "You do not have permission to ban. This incident will be recorded."
@@ -108,7 +112,7 @@ async function purge(args, message) {
 }
 
 function say(args, message) {
-  return message;
+  message.channel.send(args[0]);
 }
 
 bot.login(token);
