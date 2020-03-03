@@ -3,15 +3,14 @@ const bot = new Discord.Client();
 const fs = require('fs')
 const path = './botconfig.json'
 
-let config;
+let token;
 const prefix = "!"
 try {
   if (fs.existsSync(path)) {
-    config = require("./botconfig.json");
+    const config = require("./botconfig.json");
+    token = config.token;
   } else {
-    console.log(process.env.TOKEN);
-    // config = process.env.TOKEN;
-    return;
+    token = process.env.TOKEN;
   }
 } catch (err) {}
 
@@ -112,4 +111,4 @@ function say(args, message) {
   return message;
 }
 
-bot.login(config.token);
+bot.login(token);
