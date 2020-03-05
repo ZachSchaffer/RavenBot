@@ -64,7 +64,9 @@ bot.on("message", async message => {
 async function ban(args, message) {
   if (!message.mentions.members.first()) {
     console.log(
-      message.author.tag + " tried to ban " + message.mentions.members.first().tag
+      message.author.tag +
+        " tried to ban " +
+        message.mentions.members.first().tag
     );
     return message.channel.send(
       "Invalid target. This incident will be recorded."
@@ -72,7 +74,7 @@ async function ban(args, message) {
   }
 
   console.log(
-    message.author.tag + " tried to ban " + message.mentions.members.first().tag;
+    message.author.tag + " tried to ban " + message.mentions.members.first().tag
   );
   if (
     !message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))
