@@ -12,7 +12,7 @@ try {
   } else {
     token = process.env.TOKEN;
   }
-} catch (err) {}
+} catch (err) { }
 
 bot.on("ready", () => {
   console.log(
@@ -37,8 +37,8 @@ bot.on("message", async message => {
   // Ignore other bots
   if (message.author.bot) return;
 
-  // Also good practice to ignore any message that does not start with our prefix,
-  // which is set in the configuration file.
+  // Also good practice to ignore any message that does not start with our
+  // prefix, which is set in the configuration file.
   if (message.content.indexOf(prefix) !== 0) return;
 
   // split command e.g. args = ["Is", "this", "the", "real", "life"]
@@ -64,8 +64,8 @@ bot.on("message", async message => {
 async function ban(args) {
   console.log(
     message.author.tag +
-      " tried to ban " +
-      message.mentions.members.first().nickname
+    " tried to ban " +
+    message.mentions.members.first().nickname
   );
   if (
     !message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))
@@ -98,14 +98,16 @@ async function ban(args) {
 async function purge(args, message) {
   const deleteCount = parseInt(args[0], 10);
 
+  if (!message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))) {
+    return message.reply("You do not have permission to purge.");
+  }
+
   if (!deleteCount || deleteCount < 2 || deleteCount > 100)
     return message.reply(
       "Please provide a number between 2 and 100 for the number of messages to delete"
     );
 
-  const fetched = await message.channel.fetchMessages({
-    limit: deleteCount
-  });
+  const fetched = await message.channel.fetchMessages({ limit: deleteCount });
   message.channel
     .bulkDelete(fetched)
     .catch(error =>
