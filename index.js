@@ -39,7 +39,7 @@ bot.on("message", async message => {
 
   // Also good practice to ignore any message that does not start with our
   // prefix, which is set in the configuration file.
-  if (message.content.indexOf(prefix) !== 0) return;
+  if (message.content.toLowerCase().indexOf(prefix) !== 0) return;
 
   // split command e.g. args = ["Is", "this", "the", "real", "life"]
   const args = message.content
