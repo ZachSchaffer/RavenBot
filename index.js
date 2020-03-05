@@ -116,7 +116,8 @@ async function purge(args, message) {
 }
 
 function say(args, message) {
-  message.channel.send(args[0]);
+  let msg = args.join(' ');
+  message.channel.send(msg);
 }
 
 bot.login(token);
