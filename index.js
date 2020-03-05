@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client();
-const fs = require('fs')
-const path = './botconfig.json'
+const fs = require("fs");
+const path = "./botconfig.json";
 
 let token;
 const prefix = "raven ";
@@ -13,7 +13,6 @@ try {
     token = process.env.TOKEN;
   }
 } catch (err) {}
-
 
 bot.on("ready", () => {
   console.log(
@@ -63,16 +62,19 @@ bot.on("message", async message => {
 });
 
 async function ban(args, message) {
-  console.log(message.author.tag + " tried to ban " + message.mentions.members.first().tag);
-  if (!message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))) {
+  console.log(
+    message.author.tag + " tried to ban " + message.mentions.members.first().tag
+  );
+  if (
+    !message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))
+  ) {
     return message.reply(
       "You do not have permission to ban. This incident will be recorded."
     );
   }
 
   let member = message.mentions.members.first();
-  if (!member)
-    return message.reply("Invalid member of server.");
+  if (!member) return message.reply("Invalid member of server.");
   if (!member.bannable)
     return message.reply(
       "You cannot ban a superior. This incident will be recorded."
@@ -84,9 +86,7 @@ async function ban(args, message) {
   await member
     .ban(reason)
     .catch(error =>
-      message.reply(
-        `${message.author} I couldn't ban because: ${error}`
-      )
+      message.reply(`${message.author} I couldn't ban because: ${error}`)
     );
   message.reply(
     `${member.user.tag} has been banned by ${message.author.tag} because ${reason}`
@@ -112,7 +112,8 @@ async function purge(args, message) {
 }
 
 function say(args, message) {
-  message.channel.send(args[0]);
+  let msg = args.join(" ");
+  message.channel.send(msg);
 }
 
 bot.login(token);
