@@ -61,18 +61,11 @@ bot.on("message", async message => {
   }
 });
 
-async function ban(args, message) {
-  if (!message.mentions.members.first()) {
-    console.log(
-      message.author.tag + " tried to ban " + message.mentions.members.first()
-    );
-    return message.channel.send(
-      "Invalid target. This incident will be recorded."
-    );
-  }
-
+async function ban(args) {
   console.log(
-    message.author.tag + " tried to ban " + message.mentions.members.first()
+    message.author.tag +
+      " tried to ban " +
+      message.mentions.members.first().nickname
   );
   if (
     !message.member.roles.some(r => ["Administrator", "Admin"].includes(r.name))
@@ -121,8 +114,7 @@ async function purge(args, message) {
 }
 
 function say(args, message) {
-  let msg = args.join(" ");
-  message.channel.send(msg);
+  message.channel.send(args[0]);
 }
 
 bot.login(token);
